@@ -44,13 +44,13 @@ class UniPusherClient private constructor(private val socket: Socket) {
             return this
         }
 
-        private lateinit var registerDateJsonString: String
+        private lateinit var registerDateJson: JSONObject
 
         fun B_register(puuid: String, cuuid: String): ClientBuilder {
             val j = JSONObject()
             j.put("puuid", puuid)
             j.put("cuuid", cuuid)
-            registerDateJsonString = j.toString(2)
+            registerDateJson = j
             return this
         }
 
@@ -81,7 +81,7 @@ class UniPusherClient private constructor(private val socket: Socket) {
             val socket = IO.socket(url)
             socket.on(Socket.EVENT_CONNECT) {
                 onConnectAction.invoke()
-                socket.emit("register", registerDateJsonString)
+                socket.emit("register", registerDateJson)
             }
             socket.on(Socket.EVENT_CONNECT_ERROR) {
                 if (debug) {
