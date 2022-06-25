@@ -1,6 +1,5 @@
 package com.wh.uni_pusher_client_lib
 
-import android.content.Context
 import android.util.Log
 import io.socket.client.IO
 import io.socket.client.Socket
@@ -125,7 +124,7 @@ class UniPusherClient private constructor(private val socket: Socket) {
                 .B_register("123", "123")
                 .C_onConnect { }
                 .D_onRegisterResult { b, msg -> Log.d("WH_", "pass:$b $msg ") }
-                .E_on("notify") { Log.d("WH_", "notify!!!") }
+                .E_on("notify") { Log.d("WP_", "notify!!!") }
                 .F_build()
                 .connect()
         }
